@@ -23,9 +23,9 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'=>'required',
-            'last_name'=>'required',
-            'email'=>'required'
+            'first_name'=>'required|max:255',
+            'last_name'=>'required|max:255',
+            'email'=>'required|numeric',
         ]);
 
         $midterm = new Midterm([
@@ -52,9 +52,9 @@ class ContactController extends Controller
     public function update(Request $request, $sr)
     {
         $request->validate([
-            'first_name'=>'required',
-            'last_name'=>'required',
-            'email'=>'required'
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'phone' => 'required|numeric',
         ]);
 
         $midterm = midterm::find($sr);

@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-  Route::resource('midterm', 'ContactController');
+  Route::resource('/midterm', 'ContactController');
 
-  Route::apiResource('midterm', 'ContactController');
+  Route::apiResource('/midterm', 'ContactController');
 
  Route::get('/midterm', 'ContactController@index');
  Route::get('/midterm/create','ContactController@create');

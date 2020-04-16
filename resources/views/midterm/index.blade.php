@@ -1,5 +1,5 @@
-@extends('base')
-@section('main')
+@extends('layout')
+@section('midterm')
 <div class="row">
 <div class="col-sm-12">
     <h1 class="display-3">Mid Term</h1>   
@@ -21,7 +21,7 @@
         @foreach($midterm as $midterm)
         <tr>
             <td>{{$midterm->sr}}</td>
-            <td>{{$midterm->first_name}} {{$contact->last_name}}</td>
+            <td>{{$midterm->first_name}} {{$midterm->last_name}}</td>
             <td>{{$midterm->email}}</td>
             <td>{{$midterm->phone}}</td>
             <td>{{$midterm->record_date}}</td>
