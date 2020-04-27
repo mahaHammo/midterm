@@ -7,14 +7,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-  Route::resource('/midterm', 'ContactController');
-
-  Route::apiResource('/midterm', 'ContactController');
-
- Route::get('/midterm', 'ContactController@index');
- Route::get('/midterm/create','ContactController@create');
- Route::post('midterm','ContactController@store');
- Route::delete('/midterm/{midterm}','ContactController@destory');
- Route::GET('/midterm/{midterm}','ContactController@show');
-  Route::GET('/midterm/{midterm}/edit','ContactController@edit');
-  Route::PATCH ('/midterm/{midterm}','ContactController@update');
+Route::get('/contact','ContactController@index');
+Route::get('/create','ContactController@create');
+Route::post('/store','ContactController@store');
+Route::get('/{contact}/edit','ContactController@edit');
+Route::post('/update/{contact}','ContactController@update');

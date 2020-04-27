@@ -2,81 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Contact;
+use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function index()
-    {
-    
-        $midterm = midterm::all();
-        return view('midterm.index', compact('midterm'));
-    }
-
-
-    public function create()
-    {
-        return view('midterm.create');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'first_name'=>'required|max:255',
-            'last_name'=>'required|max:255',
-            'email'=>'required|numeric',
-        ]);
-
-        $midterm = new Midterm([
-            'first_name' => $request->get('first_name'),
-            'last_name' => $request->get('last_name'),
-            'email' => $request->get('email'),
-            'phone' => $request->get('phone'),
-            'record_date' => $request->get('record_date'),
-        ]);
-        $midterm->save();
-        return redirect('/midterm')->with('success', ' saved!');
-    }
-    public function show($sr)
-    {
-    
-    }
-
-    public function edit($sr)
-    {
-        $contact = midterm::find($sr);
-        return view('midterm.add_edit', compact('midterm'));
-    }
-
-    public function update(Request $request, $sr)
-    {
-        $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|max:255',
-            'phone' => 'required|numeric',
-        ]);
-
-        $midterm = midterm::find($sr);
-        $midterm->first_name =  $request->get('first_name');
-        $midterm->last_name = $request->get('last_name');
-        $midterm->email = $request->get('email');
-        $midterm->phone = $request->get('phone');
-        $midterm->record_date = $request->get('record_date');
-        $midterm->save();
-
-        return redirect('/midterm')->with('success', ' updated!');
-       // return redirect('/');
-    }
-    public function destroy($id)
-    {
-       $contact = Contact::find($id);
-        $contact->delete();
-       // return redirect('/');
-       return redirect('/midterm')->with('success', ' deleted!');
-    }
-
-
-
-
+   public function index(){
+       $contacts = Contact::all();
+       return view('content.index',compact('contacts'));
+   }
+   public function create(){
+    return view('content.create');
 }
+   public function store(Request $request){
+   $request->validate([
+       'username' => 'required',
+       'useremai' => 'required',
+       'userphone' => 'required'
+   ]);
+      $contact = new Contact();
+
+      $contact->name = $request->username;
+      
+      $contact->email = $request->useremail;
+      
+      $contact->phone = $request->userphone;
+
+      $contact->save();
+      return redirect()->back();
+   }
+   public function edit(Contact $contact){
+       //$contact = Contact::findOrFail($id);
+       return view('content.create',compact('contact'));
+   }
+   public function update(Request $request , $id){
+    $request->validate([
+        'username' => 'required',
+        'useremai' => 'required',
+        'userphone' => 'required'
+    ]);
+      // $contact = Contact::findOrFail($id);
+ 
+       $contact->name = $request->username;
+       
+       $contact->email = $request->useremail;
+       
+       $contact->phone = $request->userphone;
+ 
+       $contact->save();
+       return redirect('/contact');
+    
+   }
+}
+
